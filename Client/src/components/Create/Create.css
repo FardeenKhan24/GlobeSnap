@@ -1,0 +1,147 @@
+.laptop-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 10px; 
+    width: 100%;
+    box-sizing: border-box;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.laptop-screen {
+    background-color: #f4f4f4;
+    border: 12px solid #333;
+    border-radius: 10px 10px 0 0;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto; 
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.laptop-base {
+    width: 100%;
+    max-width: 840px;
+    height: 20px;
+    background-color: #333;
+    border-radius: 0 0 12px 12px;
+    margin: 2px auto 0 auto; 
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.2);
+}
+
+.create-container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.create-container h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.create-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.create-form input,
+.create-form textarea {
+    padding: 10px;
+    outline: none;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.create-btn {
+    padding: 12px;
+    background-color: rgb(74, 74, 238);
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.create-btn:hover {
+    background-color: rgb(38, 38, 200);
+}
+
+.error{
+    color: rgb(188, 10, 10);
+    margin-top: 10px;
+    text-align: center;
+    background-color: pink;
+    padding: 10px;
+}
+
+@media (max-width: 768px) {
+    .laptop-screen {
+        padding: 15px;
+        border-width: 8px;
+    }
+
+    .laptop-base {
+        height: 16px;
+    }
+
+    .create-form {
+        gap: 16px;
+    }
+
+    .create-form input,
+    .create-form textarea {
+        font-size: 16px;
+    }
+
+    .create-btn {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .laptop-wrapper {
+        padding: 25px 5px;
+    }
+
+    .laptop-screen {
+        border-width: 6px;
+        padding: 10px;
+        max-width: 100%;
+    }
+
+    .laptop-base {
+        height: 12px;
+        max-width: 100%;
+    }
+
+    .create-container h2 {
+        font-size: 20px;
+    }
+
+    .create-btn {
+        width: 100%;
+    }
+}
+

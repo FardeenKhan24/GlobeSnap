@@ -1,0 +1,251 @@
+.navbar-route {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-top: 10px;
+  height: 60px;
+  justify-content: center;
+}
+
+.start-icon,
+.end-icon {
+  font-size: 24px;
+  padding: 0 8px;
+}
+
+.route-svg {
+  width: 250px; 
+  height: 50px;
+  overflow: visible;
+}
+
+.route-path {
+  fill: none;
+  stroke: #4db6ac;
+  stroke-width: 3;
+  stroke-dasharray: 10 8;
+  stroke-linecap: round;
+  animation: drawRoute 4s linear infinite;
+}
+
+@keyframes drawRoute {
+  0% {
+    stroke-dashoffset: 200;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* .under{
+  background-color: black;
+  color: wheat;
+} */
+
+.landing-card {
+    position: relative;
+    height: 87vh;
+    width: 100%;
+    margin-bottom: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.landing-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.landing-card-content {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.landing-card h2 {
+    margin: 0;
+    font-size: 36px;
+}
+
+.landing-card p {
+    margin: 0;
+    font-size: 18px;
+}
+
+.land-btn {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.land-btn button {
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    padding: 10px 15px;
+    cursor: pointer;
+    border: none;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.land-btn button:hover {
+    background-color: white;
+    color: black;
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    border: 1px solid black;
+}
+
+.explore{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.explore h1{
+    margin-bottom: 10px;
+}
+
+.explore input{
+    font-size: 16px;
+    width: 19rem;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    outline: none;
+}
+
+.explore input:focus{
+    border: 2px solid rgb(42, 184, 232);
+}
+
+.destinations-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(280px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  justify-items: center; 
+}
+
+.city-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.8);
+  overflow: hidden;
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.city-card:hover {
+  transform: scale(1.05);
+}
+
+.city-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.city-card:hover .city-image {
+  transform: scale(1.1);
+}
+
+.city-card  div {
+  padding: 10px 20px;
+}
+
+.city-title {
+  font-size: 1.4rem;
+  margin: 12px 0 8px;
+  font-weight: 600;
+  color: black;
+}
+
+.city-card p {
+  margin: 6px 0;
+  color: black;
+  font-size: 0.95rem;
+}
+
+.city-description {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;  
+  
+  display: box;           
+  box-orient: vertical;  
+
+  line-clamp: 2;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  line-height: 1.4;
+  word-break: break-word;
+  font-style: italic;
+}
+
+.city-card button{
+  margin: 16px;
+  padding: 10px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background-color 0.2s;
+}
+
+.city-card button:hover{
+  background-color: #0056b3;
+}
+
+.no-journals {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem;
+  font-size: 1.5rem;
+}
+
+.no-journals img {
+  max-width: 300px;
+  width: 100%;
+  height: auto;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  border: 1px solid black;
+}
+
+
+
+
+
+
+
+
+
