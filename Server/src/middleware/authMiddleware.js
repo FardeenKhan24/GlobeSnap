@@ -16,10 +16,8 @@ try {
     }
     next();
 } catch (err) {
-    console.log('JWT verification failed:', err.message);
     res.status(401).json({ message: 'Invalid token' });
 }
-
 };
 
 module.exports = { protect };
