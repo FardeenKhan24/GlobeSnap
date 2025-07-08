@@ -12,7 +12,7 @@ function Register() {
     password: "",
   });
   const [isLoading, setIsLoading] = useState(false);
-
+  const [msg, setMsg] = useState("");
 
   const navigate = useNavigate();
   const dispatch = useDispatch(); 
@@ -24,6 +24,8 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true)
+    setMsg("")
+
     try {
       const res = await axios.post(
         `${import.meta.env.VITE_API_BASE_URL}/api/users/register`,
@@ -36,11 +38,7 @@ function Register() {
       dispatch(setUser({ user, token })); 
       navigate("/"); 
     } catch (error) {
-      console.error(
-        "Registration failed:",
-        error.response?.data?.message || error.message
-      );
-      alert("Registration failed. Please try again.");
+        setMsg(error.response?.data?.message || "Register failed")      
     } finally{
       setIsLoading(false)
     }
@@ -83,6 +81,9 @@ function Register() {
             />
             <button type="submit">Register</button>
           </form>
+
+          {msg && <p className="error-message">{msg}</p>}
+
           <p>
             <Link to="/login">Already registered</Link>
           </p>

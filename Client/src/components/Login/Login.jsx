@@ -8,6 +8,7 @@ import "./Login.css";
 const Login = () => {
   const [form, setForm] = useState({ email: "", password: "" });
   const [isLoading, setIsLoading] = useState(false);
+  const [msg, setMsg] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -19,6 +20,8 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+    setMsg("")
+
     try {
       const res = await axios.post(
         `${import.meta.env.VITE_API_BASE_URL}/api/users/login`,
@@ -31,11 +34,7 @@ const Login = () => {
       dispatch(setUser({ user, token }));
       navigate("/");
     } catch (error) {
-      console.error(
-        "Login failed:",
-        error.response?.data?.message || error.message
-      );
-      alert("Login failed. Please check your credentials.");
+        setMsg(error.response?.data?.message || "Login failed")
     } finally {
       setIsLoading(false);
     }
@@ -75,6 +74,9 @@ const Login = () => {
               />
               <button type="submit">Login</button>
             </form>
+
+            {msg && <p className="error-message">{msg}</p>}
+
             <p>
               <Link to="/register">Do not have an account?</Link>
             </p>
