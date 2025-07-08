@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../features/userSlice";
 import "./Navbar.css";
@@ -11,13 +11,13 @@ const Navbar = () => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const [ham, setHam] = useState(false);
-  const [showDropdown, setShowDropdown] = useState(false); 
-
+  const [showDropdown, setShowDropdown] = useState(false);
 
   const handleLogout = () => {
-  dispatch(logout());
-  navigate("/login");
+    dispatch(logout());
+    navigate("/login");
   };
 
   useEffect(() => {
@@ -46,24 +46,36 @@ const Navbar = () => {
         <div className={`nav-links ${ham ? "show" : ""}`}>
           <ul>
             <li>
-              <Link to="/" onClick={() => setHam(false)}>
+              <Link
+                to="/"
+                onClick={() => setHam(false)}
+                className={location.pathname === "/" ? "active-link" : ""}
+              >
                 Home
               </Link>
             </li>
             <li>
-              <Link to="/about" onClick={() => setHam(false)}>
+              <Link
+                to="/about"
+                onClick={() => setHam(false)}
+                className={location.pathname === "/about" ? "active-link" : ""}
+              >
                 About
               </Link>
             </li>
             <li>
-              <Link to="/create" onClick={() => setHam(false)}>
+              <Link
+                to="/create"
+                onClick={() => setHam(false)}
+                className={location.pathname === "/create" ? "active-link" : ""}
+              >
                 Create
               </Link>
             </li>
           </ul>
         </div>
 
-        { user.token && user.user ? (
+        {user.token && user.user ? (
           <div className="navbar-user">
             <img
               src={`https://api.dicebear.com/7.x/initials/svg?seed=${user.user.username}`}

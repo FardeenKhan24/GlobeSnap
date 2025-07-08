@@ -97,7 +97,7 @@ return (
                 value={form.location}
                 onChange={handleChange}
               />
-              <label>Date</label>
+              <label>Select Date of Travel:</label>
               <input
                 type="date"
                 name="date"
