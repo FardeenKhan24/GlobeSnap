@@ -38,11 +38,14 @@ const View = () => {
   useEffect(() => {
     const fetchEntry = async () => {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/journals`, {
-          headers : {
-            "Authorization": `Bearer ${localStorage.getItem("token")}`
+        const res = await axios.get(
+          `${import.meta.env.VITE_API_BASE_URL}/api/journals`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
           }
-        });
+        );
         const singleEntry = res.data.find((j) => j._id === id);
         setEntry(singleEntry);
       } catch (error) {
@@ -55,16 +58,19 @@ const View = () => {
   const handleDelete = async () => {
     setActionLoading(true);
     try {
-      await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/api/journals/${id}`, {
-        headers:{
-          "Authorization": `Bearer ${localStorage.getItem("token")}`
+      await axios.delete(
+        `${import.meta.env.VITE_API_BASE_URL}/api/journals/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
         }
-      });
-      setActionLoading(false)
+      );
+      setActionLoading(false);
       navigate("/");
     } catch (error) {
       console.error("Error deleting entry:", error);
-      setActionLoading(false)
+      setActionLoading(false);
     }
   };
 
@@ -83,15 +89,19 @@ const View = () => {
   };
 
   if (actionLoading) {
-  return (
-    <div className="loading-container">
-      <div className="loading-bar">
-        <div></div><div></div><div></div><div></div><div></div>
+    return (
+      <div className="loading-container">
+        <div className="loading-bar">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <p>Processing...</p>
       </div>
-      <p>Processing...</p>
-    </div>
-  );
-}
+    );
+  }
 
   return (
     <>
@@ -123,13 +133,13 @@ const View = () => {
           {entry.images.length > 0 && (
             <div className="view-img">
               <div className="carousel">
-                <button onClick={handlePrev}>&lt;</button>
-                <img
-                  src={entry.images[currentIndex]?.url}
-                  alt="memory"
-                />
-                <button onClick={handleNext}>&gt;</button>
+                <img src={entry.images[currentIndex]?.url} alt="memory" />
+                <div className="carousel-buttons">
+                  <button onClick={handlePrev}>&lt;</button>
+                  <button onClick={handleNext}>&gt;</button>
+                </div>
               </div>
+              
               <div className="desc-del">
                 <p>"{entry.description}"</p>
                 <div className="del-edit">

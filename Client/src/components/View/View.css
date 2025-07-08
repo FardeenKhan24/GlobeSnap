@@ -134,24 +134,34 @@
 
 .carousel {
   display: flex;
+  flex-direction: column;
   align-items: center;
   gap: 10px;
 }
 
-.carousel button {
+.carousel-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.carousel-buttons button {
   background-color: #eee;
   border: none;
-  padding: 5px 10px;
+  padding: 5px 15px;
   font-size: 18px;
   cursor: pointer;
+  border-radius: 6px;
 }
 
 
 .view-img img {
-  width: 600px;
-  height: 400px;
+  width: 100%;
+  max-width: 600px;
+  height: auto;
   margin-bottom: 10px;
   display: block;
+  object-fit: cover;
+  border-radius: 8px;
 }
 
 
@@ -210,11 +220,6 @@
     box-sizing: border-box;
   }
 
-  .view-img img {
-    width: 350px;   
-    height: 320px;   
-  }
-
   .view-img p {
     max-width: 100%;
     width: 100%;
@@ -226,12 +231,6 @@
   }
 }
 
-@media (max-width: 500px) {
-  .view-img img {
-    width: 300px;
-    height: 270px;
-  }
-}
 
 @media (max-width: 500px) {
   .view-img{
