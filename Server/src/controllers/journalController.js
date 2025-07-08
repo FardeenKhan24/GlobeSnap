@@ -46,6 +46,13 @@ const journal = new Journal({
 
 
 const getUserJournals = async (req, res) => {
+
+     console.log("User from cookie:", req.user); // ✅ Add this
+
+  if (!req.user) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+
     const journals = await Journal.find({ user: req.user.id });
     res.json(journals);
 };
