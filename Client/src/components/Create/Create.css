@@ -95,6 +95,15 @@
     padding: 10px;
 }
 
+input[type="date"] {
+  color: #333;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+
 @media (max-width: 768px) {
     .laptop-screen {
         padding: 15px;
