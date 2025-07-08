@@ -20,7 +20,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    setMsg("")
+    setMsg("");
 
     try {
       const res = await axios.post(
@@ -34,14 +34,14 @@ const Login = () => {
       dispatch(setUser({ user, token }));
       navigate("/");
     } catch (error) {
-        setMsg(error.response?.data?.message || "Login failed")
+      setMsg(error.response?.data?.message || "Login failed");
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <>
+    <div className="login-container">
       <div className="login-container1">
         {isLoading ? (
           <div className="loading-container">
@@ -83,7 +83,7 @@ const Login = () => {
           </>
         )}
       </div>
-    </>
+    </div>
   );
 };
 
