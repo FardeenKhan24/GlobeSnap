@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { logoutUser } from "../../features/userSlice";
+import { logout } from "../../features/userSlice";
 import "./Navbar.css";
 import { MdTravelExplore } from "react-icons/md";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -16,9 +16,8 @@ const Navbar = () => {
 
 
   const handleLogout = () => {
-    localStorage.removeItem("token")
-    dispatch(logoutUser())
-    navigate("/login")
+  dispatch(logout());
+  navigate("/login");
   };
 
   useEffect(() => {

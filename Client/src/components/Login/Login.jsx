@@ -20,13 +20,14 @@ const Login = () => {
     try {
       const res = await axios.post(
         `${import.meta.env.VITE_API_BASE_URL}/api/users/login`,
-        form,
-        { withCredentials: true }
+        form
       );
-      const user = res.data.user
-      const token = res.data.token
-      dispatch(setUser({user,token}));
-      navigate("/")
+
+      const user = res.data.user;
+      const token = res.data.token;
+
+      dispatch(setUser({ user, token }));
+      navigate("/");
     } catch (error) {
       console.error(
         "Login failed:",
@@ -56,9 +57,7 @@ const Login = () => {
               onChange={handleChange}
               required
             />
-            <button type="submit">
-              Login
-            </button>
+            <button type="submit">Login</button>
           </form>
           <p>
             <Link to="/register">Do not have an account?</Link>

@@ -47,6 +47,7 @@ const Create = () => {
       await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/journals`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
+          "Authorization": `Bearer ${localStorage.getItem("token")}`
         },
         withCredentials: true,
       });

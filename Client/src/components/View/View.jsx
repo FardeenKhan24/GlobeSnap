@@ -39,7 +39,9 @@ const View = () => {
     const fetchEntry = async () => {
       try {
         const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/journals`, {
-          withCredentials: true,
+          headers : {
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
+          }
         });
         const singleEntry = res.data.find((j) => j._id === id);
         setEntry(singleEntry);
@@ -54,7 +56,9 @@ const View = () => {
     setActionLoading(true);
     try {
       await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/api/journals/${id}`, {
-        withCredentials: true,
+        headers:{
+          "Authorization": `Bearer ${localStorage.getItem("token")}`
+        }
       });
       setActionLoading(false)
       navigate("/");

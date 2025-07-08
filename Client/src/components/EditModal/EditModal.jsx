@@ -1,8 +1,15 @@
 import React from "react";
 import axios from "axios";
-import "./EditModal.css"
+import "./EditModal.css";
 
-const EditModal = ({ id, editForm, setEditForm, setEditModal, setEntry ,setActionLoading }) => {
+const EditModal = ({
+  id,
+  editForm,
+  setEditForm,
+  setEditModal,
+  setEntry,
+  setActionLoading,
+}) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setActionLoading(true);
@@ -23,12 +30,15 @@ const EditModal = ({ id, editForm, setEditForm, setEditModal, setEntry ,setActio
         formData,
         {
           withCredentials: true,
-          headers: { "Content-Type": "multipart/form-data" },
+          headers: {
+            "Content-Type": "multipart/form-data",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`,
+          },
         }
       );
       setEntry(res.data.journal);
       setEditModal(false);
-      setActionLoading(false)
+      setActionLoading(false);
     } catch (err) {
       console.error("Update failed:", err);
     }
@@ -60,9 +70,7 @@ const EditModal = ({ id, editForm, setEditForm, setEditModal, setEntry ,setActio
           <input
             type="date"
             value={editForm.date}
-            onChange={(e) =>
-              setEditForm({ ...editForm, date: e.target.value })
-            }
+            onChange={(e) => setEditForm({ ...editForm, date: e.target.value })}
             required
           />
           <textarea

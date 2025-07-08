@@ -11,29 +11,18 @@ const register = async (req, res) => {
 };
 
 const login = async (req, res) => {
-    const { email, password } = req.body;
-    const user = await User.findOne({ email });
-    if (!user || !(await bcrypt.compare(password, user.password)))
-        return res.status(401).json({ message: 'Invalid credentials' });
+  const { email, password } = req.body;
+  const user = await User.findOne({ email });
+  if (!user || !(await bcrypt.compare(password, user.password))) {
+    return res.status(401).json({ message: 'Invalid credentials' });
+  }
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
+  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+    expiresIn: '1d',
+  });
 
-    res.cookie('token', token, {
-        httpOnly: true,
-        secure: true, 
-        sameSite: 'None', 
-        maxAge: 24 * 60 * 60 * 1000,
-    });
-
-    res.json({ user,token });
+  res.json({ user, token }); // Only return JSON (no cookies)
 };
 
 
-const logout = (req, res) => {
-    res.clearCookie('token');
-    res.json({ message: 'Logged out' });
-};
-
-
-
-module.exports = { register, login, logout };
+module.exports = { register, login};
