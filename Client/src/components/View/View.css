@@ -214,7 +214,7 @@
 @media (max-width: 700px) {
   .view-img {
     flex-direction: column;
-    padding: 15px 10px; 
+    padding: 15px 10px 40px; 
     gap: 20px;
     width: 100%;
     box-sizing: border-box;
@@ -234,7 +234,7 @@
 
 @media (max-width: 500px) {
   .view-img{
-    padding: 15px 10px;
+    padding: 15px 10px 40px;
   }
 }
 
