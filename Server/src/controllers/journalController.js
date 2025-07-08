@@ -1,6 +1,5 @@
 const Journal = require('../models/Journal');
-const fs = require('fs');
-const path = require('path');
+const cloudinary = require('../utils/cloudinary');
 
 const createJournal = async (req, res) => {
   const { title, location, description, date } = req.body;
@@ -21,20 +20,25 @@ if (description.trim().length < 50) {
 }
 
 
-  const images = req.files.map(file => file.path.replace(/\\/g, '/'));
+  const images = req.files.map(file => ({
+  url: file.path,
+  public_id: file.filename,
+}));
 
-  const journal = new Journal({
-    user: req.user.id,
-    title,
-    location,
-    description,
-    date,
-    images,
-  });
+const journal = new Journal({
+  user: req.user.id,
+  title,
+  location,
+  description,
+  date,
+  images,
+});
+
 
   try {
     await journal.save();
     res.status(201).json(journal);
+    console.log('Uploaded Files:', req.files);
   } catch (error) {
     console.error('Error creating journal entry:', error);
     res.status(500).json({ message: 'Server error while creating journal entry' });
@@ -46,6 +50,7 @@ const getUserJournals = async (req, res) => {
     const journals = await Journal.find({ user: req.user.id });
     res.json(journals);
 };
+
 
 const editJournal = async (req, res) => {
   try {
@@ -61,23 +66,25 @@ const editJournal = async (req, res) => {
 
     const { title, location, description, date } = req.body;
 
-    if (
-      !title?.trim() ||
-      !location?.trim() ||
-      !date?.trim() ||
-      !description?.trim()
-    ) {
+    if (!title?.trim() || !location?.trim() || !date?.trim() || !description?.trim()) {
       return res.status(400).json({ message: 'All fields are required' });
     }
 
     if (description.trim().length < 50) {
-      return res
-        .status(400)
-        .json({ message: 'Experience must be at least 50 characters long' });
+      return res.status(400).json({ message: 'Experience must be at least 50 characters long' });
     }
 
     if (req.files && req.files.length > 0) {
-      journal.images = req.files.map((file) => file.path.replace(/\\/g, '/'));
+      for (const img of journal.images) {
+        if (img.public_id) {
+          await cloudinary.uploader.destroy(img.public_id);
+        }
+      }
+
+      journal.images = req.files.map((file) => ({
+        url: file.path,
+        public_id: file.filename,
+      }));
     }
 
     journal.title = title;
@@ -95,6 +102,7 @@ const editJournal = async (req, res) => {
 };
 
 
+
 const deleteJournal = async (req, res) => {
   try {
     const journal = await Journal.findById(req.params.id);
@@ -107,6 +115,12 @@ const deleteJournal = async (req, res) => {
       return res.status(403).json({ message: 'Unauthorized' });
     }
 
+    for (const img of journal.images) {
+      if (img.public_id) {
+        await cloudinary.uploader.destroy(img.public_id);
+      }
+    }
+
     await Journal.findByIdAndDelete(req.params.id);
     res.json({ message: 'Deleted successfully' });
 
@@ -115,6 +129,7 @@ const deleteJournal = async (req, res) => {
     res.status(500).json({ message: 'Server Error' });
   }
 };
+
 
 
 

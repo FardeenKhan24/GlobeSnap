@@ -37,11 +37,6 @@
   }
 }
 
-/* .under{
-  background-color: black;
-  color: wheat;
-} */
-
 .landing-card {
     position: relative;
     height: 87vh;
@@ -135,90 +130,98 @@
 
 .destinations-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 20px;
   padding: 20px;
-  justify-items: center; 
+  justify-items: center;
 }
 
 .city-card {
   background: white;
   border-radius: 12px;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.8);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   overflow: hidden;
   width: 100%;
-  max-width: 320px;
+  max-width: 400px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
+  transition: transform 0.3s ease;
+  height: 550px; 
 }
 
 .city-card:hover {
-  transform: scale(1.05);
+  transform: scale(1.03);
+}
+
+.city-image-wrapper {
+  width: 100%;
+  height: 320px;
+  background-color: #f9f9f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-bottom: 1px solid #ddd;
 }
 
 .city-image {
   width: 100%;
-  height: 200px;
-  object-fit: cover;
+  height: 100%;
+  object-fit: cover; 
   transition: transform 0.3s ease;
 }
 
 .city-card:hover .city-image {
-  transform: scale(1.1);
+  transform: scale(1.05); 
 }
 
-.city-card  div {
-  padding: 10px 20px;
+.city-content {
+  padding: 16px;
+  text-align: center;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .city-title {
   font-size: 1.4rem;
-  margin: 12px 0 8px;
-  font-weight: 600;
-  color: black;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #333;
 }
 
 .city-card p {
-  margin: 6px 0;
-  color: black;
+  margin: 4px 0;
+  color: #555;
   font-size: 0.95rem;
 }
 
 .city-description {
+  margin-top: 8px;
+  font-style: italic;
   display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;  
-  
-  display: box;           
-  box-orient: vertical;  
-
+  display: box; 
+  -webkit-line-clamp: 2;
   line-clamp: 2;
-
+  -webkit-box-orient: vertical;
+  box-orient: vertical; 
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: normal;
-  line-height: 1.4;
-  word-break: break-word;
-  font-style: italic;
 }
 
-.city-card button{
-  margin: 16px;
+.city-card button {
+  margin-top: 12px;
   padding: 10px 16px;
   background-color: #007bff;
   color: white;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  align-self: flex-start;
   transition: background-color 0.2s;
 }
 
-.city-card button:hover{
+.city-card button:hover {
   background-color: #0056b3;
 }
 

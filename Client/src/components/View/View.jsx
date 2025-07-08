@@ -14,6 +14,7 @@ const View = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [actionLoading, setActionLoading] = useState(false);
   const [editModal, setEditModal] = useState(false);
   const [editForm, setEditForm] = useState({
     title: "",
@@ -50,13 +51,16 @@ const View = () => {
   }, [id]);
 
   const handleDelete = async () => {
+    setActionLoading(true);
     try {
       await axios.delete(`http://localhost:5000/api/journals/${id}`, {
         withCredentials: true,
       });
+      setActionLoading(false)
       navigate("/");
     } catch (error) {
       console.error("Error deleting entry:", error);
+      setActionLoading(false)
     }
   };
 
@@ -73,6 +77,17 @@ const View = () => {
       prev === entry.images.length - 1 ? 0 : prev + 1
     );
   };
+
+  if (actionLoading) {
+  return (
+    <div className="loading-container">
+      <div className="loading-bar">
+        <div></div><div></div><div></div><div></div><div></div>
+      </div>
+      <p>Processing...</p>
+    </div>
+  );
+}
 
   return (
     <>
@@ -106,7 +121,7 @@ const View = () => {
               <div className="carousel">
                 <button onClick={handlePrev}>&lt;</button>
                 <img
-                  src={`http://localhost:5000/${entry.images[currentIndex]}`}
+                  src={entry.images[currentIndex]?.url}
                   alt="memory"
                 />
                 <button onClick={handleNext}>&gt;</button>
@@ -146,6 +161,7 @@ const View = () => {
               setEditForm={setEditForm}
               setEditModal={setEditModal}
               setEntry={setEntry}
+              setActionLoading={setActionLoading}
             />
           )}
 

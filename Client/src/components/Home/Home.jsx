@@ -85,40 +85,39 @@ const Home = () => {
       </div>
 
       <div className="destinations-container">
-        {!user ? (
-          <div className="no-journals">
-            <Link to="/login">Login to See Your Travel Memories</Link>
-          </div>
-        ) : filtered.length > 0 ? (
-          filtered.map((journal) => (
-            <div className="city-card" key={journal._id}>
-              <img
-                src={`http://localhost:5000/${journal.images[0]}`}
-                alt={journal.title}
-                className="city-image"
-              />
-              <div>
-                <h3 className="city-title">{journal.title}</h3>
-                <p>
-                  <strong>Date :</strong> {journal.date}
-                </p>
-                <p>
-                  <strong>Location :</strong> {journal.location}
-                </p>
-                <p className="city-description">{journal.description}</p>
-                <Link to={`/view/${journal._id}`}>
-                  <button>Read More</button>
-                </Link>
-              </div>
-            </div>
-          ))
-        ) : (
-          <div className="no-journals">
-            <img src={No} alt="No entries found" />
-            <Link to="/create">Document Your First Travel Story</Link>
-          </div>
-        )}
+  {!user ? (
+    <div className="no-journals">
+      <Link to="/login">Login to See Your Travel Memories</Link>
+    </div>
+  ) : filtered.length > 0 ? (
+    filtered.map((journal) => (
+      <div className="city-card" key={journal._id}>
+        <div className="city-image-wrapper">
+          <img
+            src={journal.images[0]?.url}
+            alt={journal.title}
+            className="city-image"
+          />
+        </div>
+        <div className="city-content">
+          <h3 className="city-title">{journal.title}</h3>
+          <p><strong>Date:</strong> {journal.date}</p>
+          <p><strong>Location:</strong> {journal.location}</p>
+          <p className="city-description">{journal.description}</p>
+          <Link to={`/view/${journal._id}`}>
+            <button>Read More</button>
+          </Link>
+        </div>
       </div>
+    ))
+  ) : (
+    <div className="no-journals">
+      <img src={No} alt="No entries found" />
+      <Link to="/create">Document Your First Travel Story</Link>
+    </div>
+  )}
+</div>
+
 
       <Reviews />
     </>

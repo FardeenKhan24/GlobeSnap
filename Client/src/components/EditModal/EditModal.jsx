@@ -2,9 +2,10 @@ import React from "react";
 import axios from "axios";
 import "./EditModal.css"
 
-const EditModal = ({ id, editForm, setEditForm, setEditModal, setEntry }) => {
+const EditModal = ({ id, editForm, setEditForm, setEditModal, setEntry ,setActionLoading }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setActionLoading(true);
 
     const formData = new FormData();
     formData.append("title", editForm.title);
@@ -27,6 +28,7 @@ const EditModal = ({ id, editForm, setEditForm, setEditModal, setEntry }) => {
       );
       setEntry(res.data.journal);
       setEditModal(false);
+      setActionLoading(false)
     } catch (err) {
       console.error("Update failed:", err);
     }
