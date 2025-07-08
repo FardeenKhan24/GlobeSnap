@@ -38,7 +38,7 @@ const View = () => {
   useEffect(() => {
     const fetchEntry = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/journals", {
+        const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/journals`, {
           withCredentials: true,
         });
         const singleEntry = res.data.find((j) => j._id === id);
@@ -53,7 +53,7 @@ const View = () => {
   const handleDelete = async () => {
     setActionLoading(true);
     try {
-      await axios.delete(`http://localhost:5000/api/journals/${id}`, {
+      await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/api/journals/${id}`, {
         withCredentials: true,
       });
       setActionLoading(false)

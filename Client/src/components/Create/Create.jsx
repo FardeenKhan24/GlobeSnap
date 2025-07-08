@@ -44,7 +44,7 @@ const Create = () => {
     });
 
     try {
-      await axios.post("http://localhost:5000/api/journals", formData, {
+      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/journals`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

@@ -19,7 +19,7 @@ const EditModal = ({ id, editForm, setEditForm, setEditModal, setEntry ,setActio
 
     try {
       const res = await axios.put(
-        `http://localhost:5000/api/journals/${id}`,
+        `${import.meta.env.VITE_API_BASE_URL}/api/journals/${id}`,
         formData,
         {
           withCredentials: true,

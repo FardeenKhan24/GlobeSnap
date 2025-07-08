@@ -38,7 +38,6 @@ const journal = new Journal({
   try {
     await journal.save();
     res.status(201).json(journal);
-    console.log('Uploaded Files:', req.files);
   } catch (error) {
     console.error('Error creating journal entry:', error);
     res.status(500).json({ message: 'Server error while creating journal entry' });

@@ -19,7 +19,7 @@ const Home = () => {
   useEffect(() => {
     const fetchJournals = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/journals", {
+        const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/journals`, {
           withCredentials: true,
         });
         setJournals(res.data);
