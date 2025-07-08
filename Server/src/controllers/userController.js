@@ -3,12 +3,18 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const register = async (req, res) => {
-    const { username, email, password} = req.body;
-    const hash = await bcrypt.hash(password, 10);
-    const user = new User({ username, email, password: hash });
-    await user.save();
-    res.status(201).json(user);
+  const { username, email, password } = req.body;
+  const hash = await bcrypt.hash(password, 10);
+  const user = new User({ username, email, password: hash });
+  await user.save();
+
+  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+    expiresIn: '1d',
+  });
+
+  res.status(201).json({ user, token });
 };
+
 
 const login = async (req, res) => {
   const { email, password } = req.body;
@@ -21,7 +27,7 @@ const login = async (req, res) => {
     expiresIn: '1d',
   });
 
-  res.json({ user, token }); // Only return JSON (no cookies)
+  res.json({ user, token }); 
 };
 
 

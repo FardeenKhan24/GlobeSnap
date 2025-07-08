@@ -7,6 +7,8 @@ import "./Login.css";
 
 const Login = () => {
   const [form, setForm] = useState({ email: "", password: "" });
+  const [isLoading, setIsLoading] = useState(false);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -16,7 +18,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setIsLoading(true);
     try {
       const res = await axios.post(
         `${import.meta.env.VITE_API_BASE_URL}/api/users/login`,
@@ -34,35 +36,50 @@ const Login = () => {
         error.response?.data?.message || error.message
       );
       alert("Login failed. Please check your credentials.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <>
-      <div className="login-container">
-        <div className="login-container1">
-          <h2>Login to GlobeSnap</h2>
-          <form onSubmit={handleSubmit}>
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              onChange={handleChange}
-              required
-            />
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              onChange={handleChange}
-              required
-            />
-            <button type="submit">Login</button>
-          </form>
-          <p>
-            <Link to="/register">Do not have an account?</Link>
-          </p>
-        </div>
+      <div className="login-container1">
+        {isLoading ? (
+          <div className="loading-container">
+            <div className="loading-bar">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+            <p>Logging in...</p>
+          </div>
+        ) : (
+          <>
+            <h2>Login to GlobeSnap</h2>
+            <form onSubmit={handleSubmit}>
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                onChange={handleChange}
+                required
+              />
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                onChange={handleChange}
+                required
+              />
+              <button type="submit">Login</button>
+            </form>
+            <p>
+              <Link to="/register">Do not have an account?</Link>
+            </p>
+          </>
+        )}
       </div>
     </>
   );

@@ -105,7 +105,7 @@ return (
               />
               <textarea
                 name="description"
-                placeholder="Write your experience"
+                placeholder="Write your experience (min 50 characters)"
                 rows="5"
                 value={form.description}
                 onChange={handleChange}
