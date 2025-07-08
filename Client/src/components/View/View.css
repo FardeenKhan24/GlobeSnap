@@ -156,8 +156,8 @@
 
 .view-img img {
   width: 100%;
-  max-width: 600px;
-  height: 600px;
+  max-width: 100%;
+  height: auto;
   margin-bottom: 10px;
   display: block;
   object-fit: cover;
