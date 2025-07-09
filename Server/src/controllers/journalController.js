@@ -115,6 +115,7 @@ const deleteJournal = async (req, res) => {
     }
 
     for (const img of journal.images) {
+        console.log("Deleting image:", img.public_id);
       if (img.public_id) {
         await cloudinary.uploader.destroy(img.public_id);
       }
