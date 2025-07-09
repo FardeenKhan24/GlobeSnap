@@ -113,7 +113,7 @@ const Home = () => {
                 </p>
                 <p className="city-description">{journal.description}</p>
                 <Link to={`/view/${journal._id}`}>
-                  <button>Read More</button>
+                  <button>View Travel Journey ✈️</button>
                 </Link>
               </div>
             </div>
