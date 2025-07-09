@@ -22,10 +22,17 @@ const Create = () => {
   };
 
   const handleFileChange = (e) => {
-    const selectedFiles = Array.from(e.target.files);
-    setImages(selectedFiles);
-    setError("");
+  const selectedFiles = Array.from(e.target.files);
+
+  if (selectedFiles.length > 5) {
+    setError("You can upload up to 5 images only.");
+    return;
+  }
+
+  setImages(selectedFiles);
+  setError("");
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -111,12 +118,14 @@ return (
                 value={form.description}
                 onChange={handleChange}
               />
+              <label>Upload Images (Max 5):</label>
               <input
                 type="file"
                 accept="image/*"
                 multiple
                 onChange={handleFileChange}
               />
+              <small style={{ color: "gray" }}>Supported formats: JPG, PNG, JPEG, WEBP</small>
               {error && <p className="error">{error}</p>}
               <button type="submit" className="create-btn" disabled={isLoading}>
                 Create

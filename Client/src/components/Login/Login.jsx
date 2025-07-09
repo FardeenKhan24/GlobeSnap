@@ -78,7 +78,8 @@ const Login = () => {
             {msg && <p className="error-message">{msg}</p>}
 
             <p>
-              <Link to="/register">Do not have an account?</Link>
+              New User ?
+              <Link to="/register" style={{textDecoration:"underline",fontWeight:"500"}}>Register Now</Link>
             </p>
           </>
         )}

@@ -5,7 +5,7 @@ import { logout } from "../../features/userSlice";
 import "./Navbar.css";
 import { MdTravelExplore } from "react-icons/md";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { IoIosClose } from "react-icons/io";
+import { IoMdClose } from "react-icons/io";
 
 const Navbar = () => {
   const user = useSelector((state) => state.user);
@@ -14,10 +14,20 @@ const Navbar = () => {
   const location = useLocation();
   const [ham, setHam] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   const handleLogout = () => {
+    setShowLogoutModal(true);
+  };
+
+  const confirmLogout = () => {
     dispatch(logout());
     navigate("/login");
+    setShowLogoutModal(false);
+  };
+
+  const cancelLogout = () => {
+    setShowLogoutModal(false);
   };
 
   useEffect(() => {
@@ -35,7 +45,7 @@ const Navbar = () => {
       <div className="navbar-container">
         <div className="nav-title">
           <div className="ham" onClick={() => setHam(!ham)}>
-            {ham ? <IoIosClose /> : <GiHamburgerMenu />}
+            {ham ? <IoMdClose /> : <GiHamburgerMenu />}
           </div>
           <Link to="/">
             <MdTravelExplore className="navbar-icons" />
@@ -81,7 +91,7 @@ const Navbar = () => {
               src={`https://api.dicebear.com/7.x/initials/svg?seed=${user.user.username}`}
               alt="avatar"
               className="navbar-avatar"
-              onClick={() => setShowDropdown(!showDropdown)} // 👈 toggle dropdown
+              onClick={() => setShowDropdown(!showDropdown)}
             />
             <span className="navbar-username">{user.user.username}</span>
             {showDropdown && (
@@ -98,6 +108,22 @@ const Navbar = () => {
           </button>
         )}
       </div>
+
+      {showLogoutModal && (
+        <div className="modal-overlays">
+          <div className="modal-boxes">
+            <p>Are you sure you want to logout?</p>
+            <div className="modal-buttons">
+              <button className="yes" onClick={confirmLogout}>
+                Yes
+              </button>
+              <button className="no" onClick={cancelLogout}>
+                No
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

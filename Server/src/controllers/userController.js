@@ -5,7 +5,6 @@ const jwt = require('jsonwebtoken');
 const register = async (req, res) => {
   const { username, email, password } = req.body;
 
-  // VALIDATIONS
   if (!username || username.length < 3) {
     return res.status(400).json({ message: 'Username must be at least 3 characters' });
   }

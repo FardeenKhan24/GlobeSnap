@@ -85,7 +85,8 @@ function Register() {
           {msg && <p className="error-message">{msg}</p>}
 
           <p>
-            <Link to="/login">Already registered</Link>
+            Already have an account ?{" "}
+            <Link to="/login" style={{textDecoration:"underline",fontWeight:"500"}}>Log in</Link>
           </p>
         </>
       )}
