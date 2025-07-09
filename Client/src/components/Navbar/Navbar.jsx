@@ -86,12 +86,11 @@ const Navbar = () => {
         </div>
 
         {user.token && user.user ? (
-          <div className="navbar-user">
+          <div className="navbar-user" onClick={() => setShowDropdown(!showDropdown)}>
             <img
               src={`https://api.dicebear.com/7.x/initials/svg?seed=${user.user.username}`}
               alt="avatar"
               className="navbar-avatar"
-              onClick={() => setShowDropdown(!showDropdown)}
             />
             <span className="navbar-username">{user.user.username}</span>
             {showDropdown && (
