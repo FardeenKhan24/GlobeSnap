@@ -135,8 +135,8 @@ const View = () => {
               <div className="carousel">
                 <img src={entry.images[currentIndex]?.url} alt="memory" />
                 <div className="carousel-buttons">
-                  <button onClick={handlePrev}>&lt;</button>
-                  <button onClick={handleNext}>&gt;</button>
+                  <button onClick={handlePrev}>Prev &lt;</button>
+                  <button onClick={handleNext}>&gt; Next</button>
                 </div>
               </div>
               
